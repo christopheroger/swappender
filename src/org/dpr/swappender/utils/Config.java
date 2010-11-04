@@ -13,7 +13,7 @@ public class Config {
 
 	static Properties propertyFile;
 
-	static String defaultFileName = "swlogger.properties";
+	static String defaultFileName = "swappender.properties";
 
 	private static final Log log = LogFactory.getLog(Config.class);
 
@@ -24,12 +24,12 @@ public class Config {
 			File currentDir = null;
 			File cfgFile = null;
 			InputStream in = null;
-			String message = "swlogger property file loaded";
+			String message = "swappender property file loaded";
 			try {
 				currentDir = new File(new File(".").getCanonicalPath());
 				cfgFile = new File(currentDir, defaultFileName);
 				if (cfgFile == null || !cfgFile.exists()) {
-					message = "internal swlogger property file loaded";
+					message = "internal swappender property file loaded";
 					in = Config.class.getClassLoader().getResourceAsStream(
 							"config/" + defaultFileName);
 
@@ -41,7 +41,7 @@ public class Config {
 				// close ?
 				log.debug(message);
 			} catch (IOException e) {
-				log.debug("swlogger property file load error", e);
+				log.debug("swappender property file load error", e);
 				throw new RuntimeException(e);
 			}
 

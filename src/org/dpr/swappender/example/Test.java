@@ -1,5 +1,5 @@
 /**
- *  SwLogger - Swing based appender for log4j
+ *  SwAppender - Swing based appender for log4j
  *  Copyright (C) 2009 dpr
  *
  *  This program is free software: you can redistribute it and/or modify
