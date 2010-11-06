@@ -43,13 +43,10 @@ public class LogFrameFileExample extends JFrame {
 		super();
 
 		this.setTitle("SwLog Demo");
-		setLookAndFeel();
-	}
-
-	private void setLookAndFeel() {
-		// UIManager.get
 
 	}
+
+
 
 	/**
 	 * @param args

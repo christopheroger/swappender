@@ -10,9 +10,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.UIManager.LookAndFeelInfo;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -45,13 +42,8 @@ public class LogFrameExample extends JFrame {
 		super();
 
 		this.setTitle("SwLog Demo");
-		setLookAndFeel();
 	}
 
-	private void setLookAndFeel() {
-		// UIManager.get
-
-	}
 
 	/**
 	 * @param args
@@ -68,29 +60,8 @@ public class LogFrameExample extends JFrame {
 
 	}
 
-	private void initLookAndFeel() {
-		try {
-			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-				if ("Nimbus".equals(info.getName())) {
-					UIManager.setLookAndFeel(info.getClassName());
-					break;
-				}
-			}
-		} catch (UnsupportedLookAndFeelException e) {
-			// handle exception
-		} catch (ClassNotFoundException e) {
-			// handle exception
-		} catch (InstantiationException e) {
-			// handle exception
-		} catch (IllegalAccessException e) {
-			// handle exception
-		}
-
-	}
-
 	protected void init() {
 
-		initLookAndFeel();
 		this.setContentPane(getJContentPane());
 		Logger logger = LogManager.getRootLogger();
 

@@ -178,8 +178,8 @@ public class LogPanel extends JPanel implements MouseListener {
 			ActionBar actionCommand, String toolTipText, String altText,
 			boolean isToggle, boolean showtext) {
 		// Look for the image.
-		String imgLocation = "/images/" + imageName + ".png";
-		URL imageURL = LogPanel.class.getResource(imgLocation);
+		String imgName = imageName + ".png";
+		URL imageURL = LogUtils.getImageURL(imgName);
 		AbstractButton button = null;
 		// Create and initialize the button.
 		if (isToggle) {
