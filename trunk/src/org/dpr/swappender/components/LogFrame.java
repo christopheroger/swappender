@@ -1,4 +1,4 @@
-package org.dpr.swappender.example;
+package org.dpr.swappender.components;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -13,12 +13,11 @@ import javax.swing.SwingUtilities;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.log4j.Layout;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.apache.log4j.Appender;
 import org.apache.log4j.PatternLayout;
 import org.dpr.swappender.appender.LogPanelAppender;
 import org.dpr.swappender.components.LogPanel;
+import org.dpr.swappender.utils.LogUtils;
 
 /**
  * SwLog Example
@@ -26,11 +25,10 @@ import org.dpr.swappender.components.LogPanel;
  * @author CRR
  * 
  */
-public class LogFrameThreadExample extends JFrame {
+public class LogFrame extends JFrame {
 
-	private static String APP_LOG_PATTERN = "%p|%d{dd MMM yyyy HH:mm:ss}|%m%n";
 	//
-	public static Log log = LogFactory.getLog("");
+	public static Log log = LogFactory.getLog(LogFrame.class);
 
 	private JPanel jContentPane;
 
@@ -38,26 +36,24 @@ public class LogFrameThreadExample extends JFrame {
 
 	private LogPanel panelLog = null;
 
-	public LogFrameThreadExample() {
+	public LogFrame() {
 		super();
-
-		this.setTitle("SwLog Demo");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		init();
 
 	}
 
 
 	/**
-	 * Main method
-	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		log.error("start");
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				LogFrameThreadExample frame = new LogFrameThreadExample();
+				LogFrame frame = new LogFrame();
 
-				frame.init();
-				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				frame.setVisible(true);
 			}
 		});
 
@@ -66,19 +62,9 @@ public class LogFrameThreadExample extends JFrame {
 	protected void init() {
 
 		this.setContentPane(getJContentPane());
-		Logger logger = LogManager.getRootLogger();
-
-		Layout layout = new PatternLayout(APP_LOG_PATTERN);
-
-		LogPanelAppender appender = new LogPanelAppender(layout, panelLog);
-		logger.addAppender(appender);
-
-		log.info("Test information: clickme: you can put a lot of text in the log. This text is displayed in the detail Area and is wrapped "
-				+ "if is too long.\nyou can also set text on new lines\nif you want.");
-		log.warn("test warn ");
 
 		this.pack();
-		this.setVisible(true);
+		//this.setVisible(true);
 
 	}
 
@@ -88,7 +74,6 @@ public class LogFrameThreadExample extends JFrame {
 			jContentPane = new JPanel();
 			BorderLayout bl = new BorderLayout();
 			jContentPane.setLayout(bl);
-
 			jContentPane.add(getJPanel(), BorderLayout.CENTER);
 
 		}
@@ -103,10 +88,7 @@ public class LogFrameThreadExample extends JFrame {
 			jPanel.setLayout(bl);
 
 			jPanel.add(getLogPanel());
-			JButton jb = new JButton("TEST");
-			jb.setActionCommand("START");
-			jb.addActionListener(new MyAction());
-			jPanel.add(jb);
+
 
 		}
 		return jPanel;
@@ -115,29 +97,11 @@ public class LogFrameThreadExample extends JFrame {
 	private LogPanel getLogPanel() {
 
 		if (panelLog == null) {
-			panelLog = new LogPanel(APP_LOG_PATTERN);
+			panelLog = LogUtils.getLogPanel(log);
 		}
 		return panelLog;
 	}
 
-	public void framePack() {
-		this.pack();
 
-	};
-
-	public class MyAction extends AbstractAction {
-
-		public void actionPerformed(ActionEvent event) {
-			String command = event.getActionCommand();
-			if (command.equals("START")) {
-				Test t = new Test();
-				t.addLog();
-
-			}
-			if (command.equals("STOP")) {
-
-			}
-		}
-	}
 
 }

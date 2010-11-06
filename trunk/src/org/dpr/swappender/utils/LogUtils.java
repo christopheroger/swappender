@@ -34,7 +34,9 @@ public class LogUtils {
 
 	private static final Log log = LogFactory.getLog(LogUtils.class);
 	private static final String ROOT_STRING = "level-";
-	public static final String IMG_PATH = "/images/";
+	//public static final String IMG_PATH = "/images/";
+	public static final String IMG_PATH = Config
+	.getProperty("images.directory");
 	public static String DEFAULT_LOG_PATTERN = "%p|%d{dd MMM yyyy HH:mm:ss}|%m%n";
 
 	public static String SPLITCHAR_REGEX = "\\|";
@@ -73,7 +75,7 @@ public class LogUtils {
 			imageIcons = new HashMap<String, Icon>();
 			for (String level : levels) {
 				String imgName = ROOT_STRING + level.toLowerCase() + ".png";
-				URL imageURL = LogUtils.class.getResource(IMG_PATH + File.separator + imgName);
+				URL imageURL = LogUtils.class.getResource(IMG_PATH + imgName);
 				if (imageURL != null) {
 					imageIcons
 							.put(level.toLowerCase(), new ImageIcon(imageURL));
@@ -207,7 +209,9 @@ public class LogUtils {
 
 	}
 	public static URL getImageURL(String imageName) {
-		String imgLocation = IMG_PATH + File.separator + imageName;
+		String imgLocation = IMG_PATH  + imageName;
+		//String imgLocation = "/images/" + imageName;
+
 		URL imageURL = LogUtils.class.getResource(imgLocation);
 		if (imageURL == null) {
 			log.debug("cant't find resource: " + imgLocation);
