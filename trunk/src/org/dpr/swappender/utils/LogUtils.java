@@ -205,6 +205,10 @@ public class LogUtils {
 
 	public static LogPanel getLogPanel(Log log) {
 		SwLogAppender app = getLogAppender(log);
+		if (app == null){
+			log.warn("non appender found");
+			return null;
+		}
 		return app.getLogPanel();
 
 	}

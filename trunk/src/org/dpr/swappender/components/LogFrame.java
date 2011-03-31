@@ -86,8 +86,9 @@ public class LogFrame extends JFrame {
 			jPanel.setBackground(Color.WHITE);
 			BoxLayout bl = new BoxLayout(jPanel, BoxLayout.Y_AXIS);
 			jPanel.setLayout(bl);
-
-			jPanel.add(getLogPanel());
+			if (getLogPanel()!=null){
+				jPanel.add(getLogPanel());
+			}
 
 
 		}
