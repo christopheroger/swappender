@@ -35,8 +35,7 @@ public class LogUtils {
 	private static final Log log = LogFactory.getLog(LogUtils.class);
 	private static final String ROOT_STRING = "level-";
 	//public static final String IMG_PATH = "/images/";
-	public static final String IMG_PATH = Config
-	.getProperty("images.directory");
+	public static final String IMG_PATH = Config.getProperty("images.directory");
 	public static String DEFAULT_LOG_PATTERN = "%p|%d{dd MMM yyyy HH:mm:ss}|%m%n";
 
 	public static String SPLITCHAR_REGEX = "\\|";
