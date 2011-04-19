@@ -39,7 +39,7 @@ public class Config {
 
 				propertyFile.load(in);
 				// close ?
-				log.debug(message);
+				//log.debug(message);
 			} catch (IOException e) {
 				log.debug("swappender property file load error", e);
 				throw new RuntimeException(e);
