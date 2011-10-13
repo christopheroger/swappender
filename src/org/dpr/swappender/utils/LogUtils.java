@@ -20,8 +20,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.logging.impl.Log4JLogger;
 import org.apache.log4j.Appender;
+import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
 import org.dpr.swappender.appender.LogPanelAppender;
 import org.dpr.swappender.appender.SwLogAppender;
 import org.dpr.swappender.components.LogPanel;
@@ -198,14 +200,38 @@ public class LogUtils {
 		if (logger.getParent() != null) {
 			return getAppender((Logger) logger.getParent());
 		}
-		return null;
+		return getBasicAppender();
+		//return null;
 
 	}
 
-	public static LogPanel getLogPanel(Log log) {
+	/**
+     * .
+     * 
+     *<BR><pre>
+     *<b>Algorithme : </b>
+     *DEBUT
+     *    
+     *FIN</pre>
+     *
+     * @return
+     */
+    private static SwLogAppender getBasicAppender()
+    {
+        Logger rootLogger = Logger.getRootLogger();
+
+            rootLogger.setLevel(Level.INFO);
+            SwLogAppender swApp = new LogPanelAppender();
+            swApp.setLayout(new PatternLayout(LogUtils.DEFAULT_LOG_PATTERN));
+            rootLogger.addAppender(swApp);
+            return swApp;
+
+    }
+
+    public static LogPanel getLogPanel(Log log) {
 		SwLogAppender app = getLogAppender(log);
 		if (app == null){
-			log.warn("non appender found");
+			log.warn("no appender found, using default");
 			return null;
 		}
 		return app.getLogPanel();
