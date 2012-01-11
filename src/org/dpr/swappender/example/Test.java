@@ -27,17 +27,22 @@ import org.apache.commons.logging.LogFactory;
  * 
  */
 public class Test {
-
+	public boolean running=true;
 	Log log = LogFactory.getLog(Test.class);
 
 	public void addLog() {
 		long l = System.currentTimeMillis();
-		while (true) {
+		while (running) {
 			long temp = System.currentTimeMillis();
 			if (temp > l + 1000) {
 				log.error("klmkkklmk");
 				l = temp;
 			}
 		}
+	}
+
+	public void stop() {
+		running=false;
+		
 	}
 }

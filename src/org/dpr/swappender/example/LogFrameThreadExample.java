@@ -37,12 +37,13 @@ public class LogFrameThreadExample extends JFrame {
 	private JPanel jPanel;
 
 	private LogPanel panelLog = null;
-
+	private boolean isRunning=false;
+	Test t = null;
 	public LogFrameThreadExample() {
 		super();
 
 		this.setTitle("SwLog Demo");
-
+		 t = new Test();
 	}
 
 
@@ -130,8 +131,24 @@ public class LogFrameThreadExample extends JFrame {
 		public void actionPerformed(ActionEvent event) {
 			String command = event.getActionCommand();
 			if (command.equals("START")) {
-				Test t = new Test();
-				t.addLog();
+				if (!isRunning){
+					isRunning = true;
+				  new Thread(new Runnable() {
+				      public void run() {
+//							SwingUtilities.invokeLater(new Runnable() {
+//								public void run() {
+//									
+									t.addLog();
+							//	}
+						//	});
+				      }
+				  }).start();
+				  
+				}else{
+					isRunning = false;
+					t.stop();
+				}
+				
 
 			}
 			if (command.equals("STOP")) {
