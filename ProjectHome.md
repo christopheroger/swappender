@@ -1,0 +1,1 @@
+simple log4j appender for swing applications, Firefox Error Console style.
